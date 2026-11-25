@@ -5,6 +5,10 @@ import { aliases, vueOptions } from './vite.shared';
 import yaml from '@rollup/plugin-yaml';
 
 export default defineConfig({
+  server: {
+    // Rails, inside Docker, proxies asset requests with Host "vite".
+    allowedHosts: ['vite'],
+  },
   plugins: [ruby(), vue(vueOptions), yaml()],
   css: {
     preprocessorOptions: {

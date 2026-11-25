@@ -62,6 +62,11 @@ class SuperAdmin::AccountsController < SuperAdmin::ApplicationController
     # rubocop:enable Rails/I18nLocaleTexts
   end
 
+  def destroy_logo
+    requested_resource.logo.purge
+    redirect_back(fallback_location: [namespace, requested_resource])
+  end
+
   def reset_cache
     requested_resource.reset_cache_keys
     # rubocop:disable Rails/I18nLocaleTexts

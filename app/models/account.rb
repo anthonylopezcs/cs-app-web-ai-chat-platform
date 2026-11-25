@@ -24,14 +24,14 @@
 #
 
 class Account < ApplicationRecord
-  # used for multi-flag bitset columns
-  include FlagShihTzu
+  include FlagShihTzu # multi-flag bitset columns
   include Reportable
   include Featurable
   include CacheKeys
   include CaptainFeaturable
   include AccountEmailRateLimitable
   include AccountSettingsSchema
+  include AccountLogo
 
   DEFAULT_QUERY_SETTING = {
     flag_query_mode: :bit_operator,

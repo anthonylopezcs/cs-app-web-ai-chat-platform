@@ -1,25 +1,25 @@
 {
   "LOGIN": {
-    "TITLE": "Iniciar sesión en Chatwoot",
+    "TITLE": "Iniciar sesión",
     "EMAIL": {
-      "LABEL": "E-mail",
-      "PLACEHOLDER": "ejemplo{'@'}nombredeempresa.com",
-      "ERROR": "Por favor, introduzca una dirección de correo válida"
+      "LABEL": "Correo electrónico",
+      "PLACEHOLDER": "ejemplo{'@'}empresa.com",
+      "ERROR": "Ingresa un correo electrónico válido"
     },
     "PASSWORD": {
       "LABEL": "Contraseña",
       "PLACEHOLDER": "Contraseña"
     },
     "API": {
-      "SUCCESS_MESSAGE": "Inicio de sesión exitoso",
-      "ERROR_MESSAGE": "No se pudo conectar al servidor Woot, por favor inténtalo de nuevo más tarde",
-      "UNAUTH": "Nombre de usuario / Contraseña incorrecto. Inténtelo de nuevo"
+      "SUCCESS_MESSAGE": "Inicio de sesión correcto",
+      "ERROR_MESSAGE": "No se pudo conectar con el servidor. Inténtalo de nuevo.",
+      "UNAUTH": "El correo o la contraseña no son correctos. Inténtalo de nuevo."
     },
     "OAUTH": {
       "GOOGLE_LOGIN": "Iniciar sesión con Google",
-      "BUSINESS_ACCOUNTS_ONLY": "No puedes crear una nueva cuenta con una dirección de correo electrónico personal. Por favor, regístrate usando tu correo electrónico de trabajo.",
-      "NO_ACCOUNT_FOUND": "No pudimos encontrar una cuenta para tu dirección de correo electrónico.",
-      "SHOPIFY_INSTALLATION_FAILED": "We couldn't complete your Shopify installation. Please restart installation from Shopify."
+      "BUSINESS_ACCOUNTS_ONLY": "No puedes crear una cuenta con un correo personal. Regístrate con tu correo de trabajo.",
+      "NO_ACCOUNT_FOUND": "No encontramos una cuenta con ese correo electrónico.",
+      "SHOPIFY_INSTALLATION_FAILED": "No pudimos completar la instalación de Shopify. Vuelve a iniciarla desde Shopify."
     },
     "FORGOT_PASSWORD": "¿Olvidaste tu contraseña?",
     "CREATE_NEW_ACCOUNT": "Crear nueva cuenta",

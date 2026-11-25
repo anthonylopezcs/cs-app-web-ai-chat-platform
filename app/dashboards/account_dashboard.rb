@@ -28,6 +28,11 @@ class AccountDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number.with_options(searchable: true),
     name: Field::String.with_options(searchable: true),
+    logo: Field::ActiveStorage.with_options(
+      destroy_url: proc do |_namespace, _resource, attachment|
+        [:logo_super_admin_account, { attachment_id: attachment.id }]
+      end
+    ),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     users: CountField,
@@ -67,6 +72,7 @@ class AccountDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = (%i[
     id
     name
+    logo
     created_at
     updated_at
     locale
@@ -92,6 +98,7 @@ class AccountDashboard < Administrate::BaseDashboard
     name
     locale
     status
+    logo
   ] + enterprise_form_attributes).freeze
 
   # COLLECTION_FILTERS
@@ -122,7 +129,7 @@ class AccountDashboard < Administrate::BaseDashboard
   # to prevent an error from being raised (wrong number of arguments)
   # Reference: https://github.com/thoughtbot/administrate/pull/2356/files#diff-4e220b661b88f9a19ac527c50d6f1577ef6ab7b0bed2bfdf048e22e6bfa74a05R204
   def permitted_attributes(action)
-    attrs = super + [limits: {}, captain_models: {}]
+    attrs = super + [:logo, { limits: {}, captain_models: {} }]
     attrs += %i[suspension_category suspension_reason] if action == 'update'
 
     # Add manually_managed_features to permitted attributes only for Chatwoot Cloud

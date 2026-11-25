@@ -182,6 +182,49 @@ RSpec.describe 'Super Admin accounts API', type: :request do
         end
       end
 
+      it 'attaches a logo when a super admin uploads an image' do
+        sign_in(super_admin, scope: :super_admin)
+        file = fixture_file_upload(Rails.root.join('spec/assets/avatar.png'), 'image/png')
+
+        patch "/super_admin/accounts/#{account.id}",
+              params: {
+                account: {
+                  name: account.name,
+                  locale: account.locale,
+                  status: account.status,
+                  logo: file
+                }
+              }
+
+        expect(response).to have_http_status(:redirect)
+        expect(account.reload.logo).to be_attached
+        expect(account.logo.content_type).to eq('image/png')
+
+        get "/super_admin/accounts/#{account.id}/edit"
+
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include('avatar.png')
+      end
+
+      it 'rejects a logo that is not an image' do
+        sign_in(super_admin, scope: :super_admin)
+        file = fixture_file_upload(Rails.root.join('spec/assets/contacts.csv'), 'text/csv')
+
+        patch "/super_admin/accounts/#{account.id}",
+              params: {
+                account: {
+                  name: account.name,
+                  locale: account.locale,
+                  status: account.status,
+                  logo: file
+                }
+              }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.body).to include('filetype not supported')
+        expect(account.reload.logo).not_to be_attached
+      end
+
       it 'rejects invalid Captain model overrides' do
         sign_in(super_admin, scope: :super_admin)
         existing_captain_models = account.captain_models

@@ -2,8 +2,13 @@
   <% if field.attached? %>
     <ul class="mb-3 space-y-2">
       <% field.attachments.each do |attachment| %>
+        <% next unless attachment.persisted? %>
         <li class="flex items-center gap-3 rounded-lg border border-n-weak p-2">
-          <%= image_tag field.variant(attachment, resize_to_limit: [112, 112]), alt: "", class: "size-14 shrink-0 rounded-md object-cover" %>
+          <% if attachment.variable? %>
+            <%= image_tag field.variant(attachment, resize_to_limit: [112, 112]), alt: "", class: "size-14 shrink-0 rounded-md object-cover" %>
+          <% elsif attachment.content_type.to_s.start_with?("image/") %>
+            <%= image_tag field.blob_url(attachment), alt: "", class: "size-14 shrink-0 rounded-md object-cover" %>
+          <% end %>
           <div class="min-w-0 flex-1">
             <%= link_to attachment.filename, field.blob_url(attachment), class: "block truncate text-label text-n-slate-12 hover:underline" %>
             <p class="text-label-small text-n-slate-11"><%= number_to_human_size(attachment.byte_size) %></p>

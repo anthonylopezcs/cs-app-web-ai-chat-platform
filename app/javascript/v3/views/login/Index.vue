@@ -158,6 +158,9 @@ export default {
     }
   },
   mounted() {
+    this.$nextTick(() => {
+      this.$i18n.locale = 'es';
+    });
     if (this.authError) {
       // Wait for the sibling snackbar to mount and subscribe to toast events.
       this.$nextTick(() => {
@@ -404,15 +407,12 @@ export default {
       <img
         :src="globalConfig.logo"
         :alt="globalConfig.installationName"
-        class="block w-auto h-8 mx-auto dark:hidden"
+        class="mx-auto size-20"
       />
-      <img
-        v-if="globalConfig.logoDark"
-        :src="globalConfig.logoDark"
-        :alt="globalConfig.installationName"
-        class="hidden w-auto h-8 mx-auto dark:block"
-      />
-      <h2 class="mt-6 text-3xl font-medium text-center text-n-slate-12">
+      <p class="mt-4 text-2xl font-semibold text-center text-n-slate-12">
+        {{ globalConfig.installationName }}
+      </p>
+      <h2 class="mt-2 text-xl font-medium text-center text-n-slate-11">
         {{ replaceInstallationName($t('LOGIN.TITLE')) }}
       </h2>
       <p v-if="showSignupLink" class="mt-3 text-sm text-center text-n-slate-11">
